@@ -5,6 +5,9 @@ const adminData   = require('./routes/admin');
 const shopRoutes  = require('./routes/shop');
 const app         = express();
 
+app.set('view engine', 'ejs');
+app.set('views', 'views'); // there is no need for this.
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', adminData.routes);
