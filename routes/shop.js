@@ -1,12 +1,12 @@
-const express = require('express');
-const path = require('path');
-const rootDir = require('../helpers/path');
-
+const express   = require('express');
+const path      = require('path');
+const rootDir   = require('../helpers/path');
+const adminData = require('./admin');
 
 const userRoutes = express.Router();
 
 userRoutes.get('/', (req, res, next) => {
-    // res.send('<h1>Hello from Express!</h1>');
+    console.log(adminData.products);
     res.sendFile(path.join(rootDir, 'views', 'shop.html'));
 });
 
