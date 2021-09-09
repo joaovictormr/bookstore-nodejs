@@ -10,6 +10,8 @@ userRoutes.get('/products/:productId', shopController.getProduct);
 
 userRoutes.get('/cart', shopController.getCart);
 
+userRoutes.post('/cart', shopController.postCart);
+
 userRoutes.get('/orders', shopController.getOrders);
 
 userRoutes.get('/checkout', shopController.getCheckout);
