@@ -49,9 +49,7 @@ exports.getCart = (req, res, next) => {
                 products: cartProducts
             });
         })
-        
     });
-    
 };
 
 exports.postCart = (req, res, next) => {

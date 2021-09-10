@@ -7,13 +7,12 @@ const p = path.join(dirPath, 'data', 'products.json');
 
 const getProductsFromFile = (callback) => {
     fs.readFile(p, (error, fileContent) => {
-        let products = [];
         if (error) {
             return callback([]);
         }
         callback(JSON.parse(fileContent));
     })
-}
+};
 
 module.exports = class Product {
     constructor(id, title, imageUrl, description, price) {
@@ -22,7 +21,7 @@ module.exports = class Product {
         this.imageUrl = imageUrl;
         this.description = description;
         this.price = price;
-    }
+    };
 
     save() {
         getProductsFromFile(products => {
@@ -44,18 +43,18 @@ module.exports = class Product {
                 });
             }
         });
-    }
+    };
 
     static fetchAll(callback) {
         getProductsFromFile(callback);
-    }
+    };
 
     static findById(id, cb) {
         getProductsFromFile(products => {
             const product = products.find(p => p.id === id);
             cb(product);
         })
-    }
+    };
 
     static deleteById(productId) {
         // tem que colocar a funçaõ de remover do carrinho;
@@ -70,5 +69,5 @@ module.exports = class Product {
                 }
             });
         })
-    }
+    };
 }
