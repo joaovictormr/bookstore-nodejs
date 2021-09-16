@@ -11,6 +11,8 @@ const Product = sequelize.define('product', {
 
     title: Sequelize.STRING,
 
+    imageUrl: Sequelize.STRING,
+
     price: {
         type: Sequelize.DOUBLE,
         allowNull: false
