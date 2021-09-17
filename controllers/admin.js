@@ -22,6 +22,7 @@ exports.postAddProducts = (req, res, next) => {
         })
         .then(result => {
             console.log("Product created sucessfully")
+            res.redirect('/admin/products');
         })
         .catch(err => console.log(err));
 }
@@ -80,6 +81,15 @@ exports.postEditProduct = (req, res, next) => {
 }
 
 exports.postDeleteProduct = (req, res, next) => {
-    ProductModel.deleteById(req.body.productId);
-    res.redirect('/admin/products');
+    ProductModel.findByPk(req.body.productId)
+    .then(product => {
+        return product.destroy();
+    })
+    .then(result => {
+        console.log("PRODUCT DESTROYED");
+        res.redirect('/admin/products');
+    })
+    .catch(err => console.log(err));
+    // ProductModel.deleteById(req.body.productId);
+    // res.redirect('/admin/products');
 }
