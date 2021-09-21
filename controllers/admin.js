@@ -14,7 +14,8 @@ exports.postAddProducts = (req, res, next) => {
     const imageUrl      = req.body.imageUrl;
     const price         = req.body.price;
     const description   = req.body.description;
-    ProductModel.create({
+    req.user
+        .createProduct({
             title: title,
             imageUrl: imageUrl,
             price: price,
@@ -47,15 +48,16 @@ exports.getEditProducts = (req, res, next) => {
 }
 
 exports.getProducts = (req, res, next) => {
-    ProductModel.findAll()
-    .then(products => {
-        res.render('admin/products', {
-            prods: products,
-            pageTitle: 'Admin Products',
-            path: '/admin/products'
-        });
-    })
-    .catch(err => console.log(err));
+    req.user
+        .getProducts()
+        .then(products => {
+            res.render('admin/products', {
+                prods: products,
+                pageTitle: 'Admin Products',
+                path: '/admin/products'
+            });
+        })
+        .catch(err => console.log(err));
 }
 
 exports.postEditProduct = (req, res, next) => {
