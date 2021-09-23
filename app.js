@@ -30,9 +30,11 @@ app.use(errorController.get404Page);
 
 //Relationships definitions
 
-Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'}); // Redudant because of the hasMany below. But I will leave here just as educational purpose.
+Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+User.hasMany(Product);
 User.hasOne(Cart);
 Cart.belongsToMany(Product, {through: CartItem});
+Product.belongsToMany(Cart, {through: CartItem});
 
 sequelize
     // .sync({force: true})
