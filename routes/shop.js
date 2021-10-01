@@ -18,6 +18,4 @@ userRoutes.post('/create-order', shopController.postOrder);
 
 userRoutes.get('/orders', shopController.getOrders);
 
-userRoutes.get('/checkout', shopController.getCheckout);
-
 module.exports = userRoutes;
