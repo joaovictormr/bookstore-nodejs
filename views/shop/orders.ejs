@@ -11,7 +11,14 @@
             <% else { %>
                 <ul>
                     <% orders.forEach(order => { %>
-                        <li></li>
+                        <li>
+                            <h1># <%= order.id %></h1>
+                            <ul>
+                                <% order.orderItem.forEach(item => { %>
+                                    <li><%= item.title %> (<%= item.quantity %></li>
+                                <% }); %>
+                            </ul>
+                        </li>
                     <% }); %>
                 </ul>
             <% } %>
