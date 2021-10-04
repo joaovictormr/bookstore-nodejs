@@ -1,11 +1,11 @@
 const express           = require('express');
 const bodyParser        = require('body-parser');
 const path              = require('path');
-// const adminRoutes       = require('./routes/admin');
-// const shopRoutes        = require('./routes/shop');
+const adminRoutes       = require('./routes/admin');
+const shopRoutes        = require('./routes/shop');
 const app               = express();
 const errorController   = require('./controllers/error');
-const mongoConnect      = require('./util/database');
+const mongoConnect      = require('./util/database').mongoConnect;
 
 
 app.set('view engine', 'ejs');
@@ -19,13 +19,13 @@ app.use((req, res, next) => {
     //         next();
     //     })
     //     .catch(err => console.log(err));
+    next();
 });
-// app.use('/admin', adminRoutes);
-// app.use(shopRoutes);
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
 app.use(errorController.get404Page);
 
-mongoConnect(client => {
-    console.log(client);
+mongoConnect(() => {
     app.listen(3000);
 });
 
