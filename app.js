@@ -7,7 +7,8 @@ const app               = express();
 const errorController   = require('./controllers/error');
 const mongoConnect      = require('./util/database').mongoConnect;
 const User              = require('./models/user');
-
+const mongoose          = require('mongoose');
+require('dotenv').config();
 
 app.set('view engine', 'ejs');
 
@@ -27,7 +28,11 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(errorController.get404Page);
 
-mongoConnect(() => {
-    app.listen(3000);
-});
+mongoose.connect(process.env.MONGODB_URL)
+    .then(result => {
+        app.listen(3000);
+    })
+// mongoConnect(() => {
+//     app.listen(3000);
+// });
 
