@@ -20,7 +20,7 @@ exports.postAddProducts = (req, res, next) => {
         imageUrl: imageUrl,
         description: description
     });
-    
+
     product
         .save()
         .then(result => {
@@ -51,7 +51,7 @@ exports.getEditProducts = (req, res, next) => {
 }
 
 exports.getProducts = (req, res, next) => {
-    ProductModel.fetchAll()
+    ProductModel.find()
         .then(products => {
             res.render('admin/products', {
                 prods: products,
@@ -67,11 +67,15 @@ exports.postEditProduct = (req, res, next) => {
     const updatedTitle = req.body.title;
     const updatedPrice = req.body.price;
     const updatedImageUrl = req.body.imageUrl;
-    const updateDesc = req.body.description;
+    const updatedDesc = req.body.description;
 
-    const product = new ProductModel(updatedTitle, updatedPrice, updateDesc, updatedImageUrl, productId);
-
-    product.save()
+    ProductModel.findById(productId).then(product => {
+        product.title = updatedTitle;
+        product.price = updatedPrice;
+        product.description = updatedDesc;
+        product.imageUrl = updatedImageUrl;
+        return product.save();
+    })
     .then(result => {
         console.log("UPDATED PRODUCT!!!");
         res.redirect('/admin/products');
