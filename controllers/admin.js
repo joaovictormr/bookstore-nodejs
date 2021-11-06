@@ -18,7 +18,8 @@ exports.postAddProducts = (req, res, next) => {
         title: title,
         price: price,
         imageUrl: imageUrl,
-        description: description
+        description: description,
+        userId: req.user //You could do like this: req.user._id but by default when you use the short sentence (req.user) Mongoose will look for the ObjectId property;
     });
 
     product
