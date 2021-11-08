@@ -8,9 +8,9 @@ userRoutes.get('/products', shopController.getProducts);
 
 userRoutes.get('/products/:productId', shopController.getProduct);
 
-// userRoutes.get('/cart', shopController.getCart);
+userRoutes.get('/cart', shopController.getCart);
 
-// userRoutes.post('/cart', shopController.postCart);
+userRoutes.post('/cart', shopController.postCart);
 
 // userRoutes.post('/cart-delete-item', shopController.postCartDeleteProduct);
 
